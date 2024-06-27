@@ -77,7 +77,7 @@ int GENERAL_NAME_cmp(GENERAL_NAME *a, GENERAL_NAME *b)
     case GEN_EMAIL:
     case GEN_DNS:
     case GEN_URI:
-        result = ASN1_STRING_cmp(a->d.ia5, b->d.ia5);
+        result = ASN1_STRING_cmp((ASN1_STRING*) a->d.ia5, (ASN1_STRING*) b->d.ia5);
         break;
 
     case GEN_DIRNAME:
