@@ -61,11 +61,11 @@ build_script:
 
 
 test_script:
-    - ps: mkdir .\_install
-    - ps: cmd /c "nmake install DESTDIR=.\_install 2>&1"
-    - ps: Compress-Archive -Path .\_install -DestinationPath openssl.zip
-    - ps: Get-ChildItem .\openssl.zip | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
     - cd _build
+    - ps: mkdir ..\_install
+    - ps: cmd /c "nmake install DESTDIR=..\_install 2>&1"
+    - ps: Compress-Archive -Path ..\_install -DestinationPath openssl.zip
+    - ps: Get-ChildItem .\openssl.zip | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
     - ps: >-
         If ($env:Configuration -Match "shared" -or $env:EXTENDED_TESTS) {
             if ($env:EXTENDED_TESTS) {
