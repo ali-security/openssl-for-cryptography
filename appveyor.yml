@@ -58,8 +58,6 @@ build_script:
             cmd /c "nmake build_all_generated 2>&1"
             cmd /c "nmake PERL=no-perl 2>&1"
         }
-    - ps: Compress-Archive -Path ..\_install -DestinationPath openssl.zip
-    - ps: Get-ChildItem .\openssl.zip | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
     - cd ..
 
 test_script:
@@ -77,4 +75,6 @@ test_script:
             mkdir ..\_install
             cmd /c "nmake install DESTDIR=..\_install 2>&1"
         }
+    - ps: Compress-Archive -Path ..\_install -DestinationPath openssl.zip
+    - ps: Get-ChildItem .\openssl.zip | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
     - cd ..
